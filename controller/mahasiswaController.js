@@ -18,12 +18,30 @@ const create = async (req, res) => {
     });
 }
 
-const update = async (req, res) => {
-    await mahasiswaHandler.updateMahasiswa(req);
+const update = async (req, res, next) => {
+    try {
+        const mahasiswaId = req.params.id;
+        await mahasiswaHandler.updateMahasiswa(mahasiswaId, req);
 
-    res.json({
-        message: "UPDATE mahasiswa BERHASIL",
-    });
+        res.json({
+            message: "UPDATE mahasiswa BERHASIL",
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
-module.exports = { get, create, update };
+const remove = async (req, res, next) => {
+    try {
+        const mahasiswaId = req.params.id;
+        await mahasiswaHandler.deleteMahasiswa(mahasiswaId, req);
+
+        res.json({
+            message: "DELETE mahasiswa BERHASIL"
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { get, create, update, remove };

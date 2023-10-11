@@ -1,3 +1,4 @@
+const {ResponseError} = require('../error/responseError');
 const dbConn = require("../lib/db.js");
 
 const getAllMahasiswa = async () => {
@@ -16,13 +17,31 @@ const createMahasiswa = async (req, res) => {
     return rows;
 }
 
-const updateMahasiswa = async (req, res) => {
+const updateMahasiswa = async (mahasiswaId, req, res) => {
     const { nim, nama, agama, jenis_kelamin, alamat } = req.body;
-    const { id } = req.params;
 
-    const results = await dbConn.execute('UPDATE `tb_mahasiswa` SET `nim_mhs`=?, `nama_mhs`=?, `agama_mhs`=?, `jk_mhs`=?, `alamat_mhs`=? WHERE  `id_mhs`=?', [nim, nama, agama, jenis_kelamin, alamat, id]);
+    const [rows] = await dbConn.query('SELECT * FROM tb_mahasiswa WHERE id_mhs=?', [mahasiswaId]);
+
+    if(rows.length !== 1){
+        throw new ResponseError(404, "Mahasiswa is not found");
+    }
+
+    const results = await dbConn.execute('UPDATE `tb_mahasiswa` SET `nim_mhs`=?, `nama_mhs`=?, `agama_mhs`=?, `jk_mhs`=?, `alamat_mhs`=? WHERE `id_mhs`=?', [nim, nama, agama, jenis_kelamin, alamat, mahasiswaId]);
 
     return results;
 }
 
-module.exports = { getAllMahasiswa, createMahasiswa, updateMahasiswa };
+const deleteMahasiswa = async(mahasiswaId, req, res) => {
+
+    const [rows] = await dbConn.query('SELECT * FROM tb_mahasiswa WHERE id_mhs=?', [mahasiswaId]);
+
+    if(rows.length !== 1){
+        throw new ResponseError(404, "Mahasiswa is not found");
+    }
+
+    const results = await dbConn.execute('DELETE FROM `tb_mahasiswa` WHERE `id_mhs`=?', [mahasiswaId]);
+
+    return results;
+}
+
+module.exports = { getAllMahasiswa, createMahasiswa, updateMahasiswa, deleteMahasiswa };
