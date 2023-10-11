@@ -16,4 +16,13 @@ const createMahasiswa = async (req, res) => {
     return rows;
 }
 
-module.exports = { getAllMahasiswa, createMahasiswa };
+const updateMahasiswa = async (req, res) => {
+    const { nim, nama, agama, jenis_kelamin, alamat } = req.body;
+    const { id } = req.params;
+
+    const results = await dbConn.execute('UPDATE `tb_mahasiswa` SET `nim_mhs`=?, `nama_mhs`=?, `agama_mhs`=?, `jk_mhs`=?, `alamat_mhs`=? WHERE  `id_mhs`=?', [nim, nama, agama, jenis_kelamin, alamat, id]);
+
+    return results;
+}
+
+module.exports = { getAllMahasiswa, createMahasiswa, updateMahasiswa };

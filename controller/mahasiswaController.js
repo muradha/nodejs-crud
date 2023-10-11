@@ -1,7 +1,7 @@
-const siswaHandler = require("../handler/mahasiswaHandler");
+const mahasiswaHandler = require("../handler/mahasiswaHandler");
 
 const get = async (req, res) => {
-    const data = await siswaHandler.getAllSiswa();
+    const data = await mahasiswaHandler.getAllMahasiswa();
 
     res.json({
         message: "GET all mahasiswa BERHASIL",
@@ -10,7 +10,7 @@ const get = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    const data = await siswaHandler.createSiswa(req);
+    const data = await mahasiswaHandler.createMahasiswa(req);
 
     res.json({
         message: "CREATE new mahasiswa BERHASIL",
@@ -18,5 +18,12 @@ const create = async (req, res) => {
     });
 }
 
+const update = async (req, res) => {
+    await mahasiswaHandler.updateMahasiswa(req);
 
-module.exports = { get, create };
+    res.json({
+        message: "UPDATE mahasiswa BERHASIL",
+    });
+}
+
+module.exports = { get, create, update };
