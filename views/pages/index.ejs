@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data MAHASISWA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+<body style="background: lightgray">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card border-0 shadow rounded">
+                    <div class="card-body">
+                        <a href="/mahasiswa/create" class="btn btn-md btn-success mb-3">TAMBAH MAHASISWA</a>
+                        <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col">NO.</th>
+                                <th scope="col">NIM MAHASISWA</th>
+                                <th scope="col">NAMA MAHASISWA</th>
+                                <th scope="col">AGAMA</th>
+                                <th scope="col">JENIS KELAMIN</th>
+                                <th scope="col">ALAMAT</th>
+                                <th scope="col">AKSI</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <% if(data.length){
+                                    
+                                    for(let i = 0; i < data.length; i++) {%>  
+                                        <tr>
+                                            <th scope="row" class="text-center"><%= (i+1) %></th>
+                                            <td><%= data[i].nim_mhs%></td>
+                                            <td><%= data[i].nama_mhs%></td>
+                                            <td><%= data[i].agama_mhs%></td>
+                                            <td><%= data[i].jk_mhs%></td>
+                                            <td><%= data[i].alamat_mhs%></td>
+                                            <td class="text-center d-flex">
+                                                <a href="/mahasiswa/edit/<%=data[i].id_mhs%>" class="btn btn-sm btn-primary mr-2">EDIT</a>
+                                                <form method="POST" onclick="return confirm('Are You sure?')" action="/mahasiswa/delete/<%=data[i].id_mhs%>">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                  </form>
+                                            </td>
+                                        </tr>
+                                    <% }
+                                    
+                                }else{ %>
+                                    <tr>
+                                        <td colspan="4">
+                                            <div class="alert alert-danger" role="alert">
+                                                Data Tidak Ditemukan !
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% } %>    
+                            </tbody>
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    </script>
+
+</body>
+</html>

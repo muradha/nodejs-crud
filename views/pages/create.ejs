@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Mahasiswa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+
+<body style="background: lightgray">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-0 shadow rounded">
+                    <div class="card-body">
+                        <form action="/mahasiswa/create" method="post">
+                            <div class="form-group">
+                                <label>NIM</label>
+                                <input type="text" class="form-control" name="nim_mhs" value="" placeholder="NIM"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" name="nama_mhs" value=""
+                                    placeholder="Masukkan Nama Mahasiswa" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Agama</label>
+                                <select name="agama_mhs" id="" class="form-control">
+                                    <option value="islam">Islam</option>
+                                    <option value="kristen">Kristen</option>
+                                    <option value="katolik">Katolik</option>
+                                    <option value="budha">Budha</option>
+                                    <option value="hindu">Hindu</option>
+                                </select>
+                            </div>
+
+                            <label>Jenis Kelamin</label>
+                            <div class="form-group">
+                                <input type="radio" name="jk_mhs" id="laki-laki" value="laki-laki" required>
+                                <label class="form-check-label" for="laki-laki">
+                                    Laki-laki
+                                </label>
+
+                                <input type="radio" name="jk_mhs" id="perempuan" value="perempuan" required>
+                                <label class="form-check-label" for="perempuan">
+                                    Perempuan
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <textarea class="form-control" name="alamat_mhs" rows="4"
+                                    placeholder="Masukkan Alamat Mahasiswa" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                            <button type="reset" class="btn btn-warning">RESET</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    </script>
+</body>
+
+</html>
